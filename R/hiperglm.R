@@ -7,6 +7,8 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
   # MLE finder via pseudo-inverse
   if (length(option) == 0) {
     design.svd <- svd(design)
+    design.Pinv <- design.svd$v %*% (1/design.svd$d * t(design.svdv$u))
+
   }
   # MLE finder via BFGS
   else if (option == "BFGS") {
