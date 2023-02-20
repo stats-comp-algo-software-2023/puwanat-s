@@ -13,7 +13,7 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
   # MLE finder via BFGS
   else if (option == "BFGS") {
     init_guess <- rep(1,ncol(design))
-    coef_calc <- stats::optim(par = init_guess, fn = logl, gr = logl_grad, method = "BFGS", y=outcome, X=design)
+    hglm_out <- stats::optim(par = init_guess, fn = logl, gr = logl_grad, method = "BFGS", y=outcome, X=design)
   }
 
   hglm_out <- list(coef_calc)
