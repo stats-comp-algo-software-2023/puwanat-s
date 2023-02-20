@@ -8,7 +8,9 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
   if (length(option) == 0) {
     design.svd <- svd(design)
     design.Pinv <- design.svd$v %*% (1/design.svd$d * t(design.svd$u))
-    coef_calc <- design.Pinv %*% outcome
+    par <- design.Pinv %*% outcome
+    value <- logl(coef_calc, y=outcome, X=design)
+    hglm_out <- list(par, value)
   }
   # MLE finder via BFGS
   else if (option == "BFGS") {
@@ -16,7 +18,6 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
     hglm_out <- stats::optim(par = init_guess, fn = logl, gr = logl_grad, method = "BFGS", y=outcome, X=design)
   }
 
-  hglm_out <- list(coef_calc)
   class(hglm_out) <- "hglm"
   return(hglm_out)
 }
