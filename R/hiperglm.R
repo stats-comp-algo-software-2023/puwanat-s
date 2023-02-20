@@ -9,6 +9,7 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
     design.svd <- svd(design)
     design.Pinv <- design.svd$v %*% (1/design.svd$d * t(design.svdv$u))
     coef_calc <- design.Pinv %*% outcome
+    return(coef_calc)
   }
   # MLE finder via BFGS
   else if (option == "BFGS") {
