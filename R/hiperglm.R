@@ -4,13 +4,18 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
   if(!(model %in% supported_model)) {
     stop(sprintf("The model %s is not supported", model))
   }
+
+  if(model == "logit") {
+    stop(cat("The logit model is not yet developed"))
+  }
+
   # MLE finder via pseudo-inverse
   if (length(option) == 0) {
     design.svd <- svd(design)
     design.Pinv <- design.svd$v %*% (1/design.svd$d * t(design.svd$u))
     par <- design.Pinv %*% outcome
-    value <- logl(coef_calc, y=outcome, X=design)
-    hglm_out <- list(par, value)
+    value <- logl(par, y=outcome, X=design)
+    hglm_out <- list(par=par, value=value)
   }
   # MLE finder via BFGS
   else if (option == "BFGS") {
