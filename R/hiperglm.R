@@ -9,10 +9,6 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
     stop("The logit model is not yet developed")
   }
 
-  if(option != "BFGS") {
-    stop("option must be 'BFGS'")
-  }
-
   # MLE finder via pseudo-inverse
   if (length(option) == 0) {
     design.svd <- svd(design)
@@ -25,6 +21,10 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
   else if (option == "BFGS") {
     init_guess <- rep(1,ncol(design))
     hglm_out <- stats::optim(par = init_guess, fn = logl, gr = logl_grad, method = "BFGS", y=outcome, X=design)
+  }
+
+  else if (option != "BFGS") {
+    stop("option must be 'BFGS'")
   }
 
   class(hglm_out) <- "hglm"
