@@ -6,11 +6,11 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
   }
 
   if(model == "logit") {
-    stop(print("The logit model is not yet developed"))
+    stop("The logit model is not yet developed")
   }
 
   if(option != "BFGS") {
-    stop(print("option must be 'BFGS'"))
+    stop("option must be 'BFGS'")
   }
 
   # MLE finder via pseudo-inverse
