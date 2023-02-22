@@ -7,7 +7,7 @@ testthat::test_that(
     coef_true <- simulated_data$coef_true
 
     analytical_grad <- logl_grad(coef_true, y=y, X=X)
-    numerical_grad <- approx_grad(function(coef) logl(coef, y, X), coef_true)
+    numerical_grad <- approx_grad(function(coef) logl(coef, y=y, X=X), coef_true)
 
     expect_true(are_all_close(
       analytical_grad, numerical_grad, abs_tol = Inf, rel_tol = 1e-3
