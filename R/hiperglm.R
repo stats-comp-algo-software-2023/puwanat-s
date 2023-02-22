@@ -11,11 +11,11 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
 
   # MLE finder via pseudo-inverse
   if (length(option) == 0) {
-    design.svd <- svd(design)
-    design.Pinv <- design.svd$v %*% (1/design.svd$d * t(design.svd$u))
-    par <- design.Pinv %*% outcome
+    design_svd <- svd(design)
+    design_Pinv <- design_svd$v %*% (1/design_svd$d * t(design_svd$u))
+    par <- design_Pinv %*% outcome
     value <- logl(par, y=outcome, X=design)
-    hglm_out <- list(par=par, value=value)
+    hglm_out <- list(par=array(par), value=value)
   }
   # MLE finder via BFGS
   else if (option == "BFGS") {
