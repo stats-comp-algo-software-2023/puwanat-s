@@ -1,6 +1,6 @@
 #' @export
 print.hglm <- function(hglm_out) {
-  cat("hiperglm output\n")
+  cat("coefficients:", hglm_out$par, "\nmaximum log-likelihood:", hglm_out$value)
 }
 
 #' @export
