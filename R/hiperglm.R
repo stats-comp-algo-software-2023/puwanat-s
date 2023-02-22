@@ -9,6 +9,10 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
     stop(print("The logit model is not yet developed"))
   }
 
+  if(option != "BFGS") {
+    stop(print("option must be 'BFGS'"))
+  }
+
   # MLE finder via pseudo-inverse
   if (length(option) == 0) {
     design.svd <- svd(design)
