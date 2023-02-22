@@ -6,7 +6,7 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
   }
 
   if(model == "logit") {
-    stop(cat("The logit model is not yet developed"))
+    stop(print("The logit model is not yet developed"))
   }
 
   # MLE finder via pseudo-inverse
