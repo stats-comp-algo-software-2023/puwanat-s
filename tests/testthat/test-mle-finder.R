@@ -7,7 +7,7 @@ testthat::test_that(
     pseudo_inverse_out <- hiperglm::hiper_glm(design, outcome, model = "linear")
     bfgs_out <- hiperglm::hiper_glm(design, outcome, model = "linear", option = list(mle_solver = 'BFGS'))
     expect_true(are_all_close(
-      coef(pseudo_inverse_out), coef(bfgs_out), abs_tol = 1e-2, rel_tol = 1e-2
+      coef.hglm(pseudo_inverse_out), coef.hglm(bfgs_out), abs_tol = 1e-2, rel_tol = 1e-2
     ))
   }
 )
